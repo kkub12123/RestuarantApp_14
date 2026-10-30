@@ -52,7 +52,76 @@ namespace RestuarantApp_14
                     default:
                         Console.WriteLine("ยังไม่เปิดใช้งานเมนูนี้");
                         break;
+
+                    case "2":
+                        Console.Write("กรอกประเภทอาหาร: ");
+                        string type = Console.ReadLine();
+                        bool foundType = false;
+                        foreach (Restaurant r in restaurants)
+                        {
+                            if (r.Type.Equals(type, StringComparison.OrdinalIgnoreCase))
+                            {
+                                Console.WriteLine(
+                                r.Name + " | " +
+                                r.Type + " | " +
+                                r.Rating
+                                );
+                                foundType = true;
+                            }
+                        }
+                        if (!foundType)
+                        {
+                            Console.WriteLine("ไม่พบร้านอาหารประเภทนี้");
+                        }
+                        break;
+
+                    //เมนู3
+                    case "3":
+                        Console.Write("กรอกชื่อร้านที่ต้องการค้นหา: ");
+                        string keyword = Console.ReadLine();
+                        bool foundName = false;
+                        foreach (Restaurant r in restaurants)
+                        {
+                            if (r.Name.IndexOf(
+                            keyword,
+                            StringComparison.OrdinalIgnoreCase) >= 0)
+                            {
+                                Console.WriteLine(
+                                r.Name + " | " +
+                                r.Type + " | " +
+                                r.Rating
+                                );
+                                foundName = true;
+                            }
+                        }
+                        if (!foundName)
+                        {
+                            Console.WriteLine("ไม่พบร้านอาหาร");
+                        }
+                        break;
+
+                    //สรุปคะแนนร้าน
+                    case "4":
+                        double total = 0;
+                        double highest = double.MinValue;
+                        foreach (Restaurant r in restaurants)
+                        {
+                            total += r.Rating;
+                            if (r.Rating > highest)
+                            {
+                                highest = r.Rating;
+                            }
+                        }
+                        double average = total / restaurants.Count;
+                        Console.WriteLine("จำนวนร้าน: " + restaurants.Count);
+                        Console.WriteLine("คะแนนเฉลี่ย: " + average.ToString("F2"));
+                        Console.WriteLine("คะแนนสูงสุด: " + highest);
+                        break;
+
+
+
                 }
+
             }
 
         }
